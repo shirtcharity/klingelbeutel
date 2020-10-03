@@ -1,0 +1,18 @@
+{
+  "name": "shirtcharity/klingelbeutel",
+  "description": "Klingelbeutel (shirt.charity Donation Collection Plugin)",
+  "type": "shopware-platform-plugin",
+  "license": "EUPL-1.2",
+  "autoload": {
+    "psr-4": {
+      "ShirtCharity\\Klingelbeutel\\": "src/"
+    }
+  },
+  "extra": {
+    "shopware-plugin-class": "ShirtCharity\\Klingelbeutel\\Klingelbeutel",
+    "label": {
+      "de-DE": "Klingelbeutel (shirt.charity Donation Collection Plugin)",
+      "en-GB": "Klingelbeutel (shirt.charity Donation Collection Plugin)"
+    }
+  }
+}
