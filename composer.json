@@ -14,5 +14,8 @@
       "de-DE": "Klingelbeutel (shirt.charity Donation Collection Plugin)",
       "en-GB": "Klingelbeutel (shirt.charity Donation Collection Plugin)"
     }
+  },
+  "scripts": {
+    "ecs": "../../../dev-ops/analyze/vendor/bin/ecs --config ../../../platform/easy-coding-standard.yml check ./src/"
   }
 }
