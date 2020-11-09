@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="ShirtCharity\Klingelbeutel\Core\Checkout\Cart\Donation\DonationLineItemAddedSubscriber">
+            <argument type="service" id="request_stack"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+        <service id="ShirtCharity\Klingelbeutel\Core\Checkout\Cart\Donation\DonationComboCartProcessor">
+            <argument type="service" id="Shopware\Core\Checkout\Cart\Price\QuantityPriceCalculator"/>
+            <argument type="service" id="translator"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="tax.repository"/>
+            <!-- inject before product cart collector (5000) -->
+            <tag name="shopware.cart.collector" priority="5500"/>
+            <!-- inject after product cart processor (5000) -->
+            <tag name="shopware.cart.processor" priority="4500"/>
+        </service>
+    </services>
+</container>

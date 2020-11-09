@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+    <card>
+        <title>Donation Configuration</title>
+        <title lang="de-DE">Spenden-Einstellungen</title>
+        <input-field>
+            <name>donationAmountOptions</name>
+            <label>Selectable Donation Amounts</label>
+            <label lang="de-DE">Auswählbare Spendenbeträge</label>
+            <helpText>Enter amounts separated by commas, e.g. 0,5,10,20,50,100</helpText>
+            <helpText lang="de-DE">Beträge durch Komma getrennt eingeben, z.B. 0,5,10,20,50,100</helpText>
+            <defaultValue>0,5,10,20,50,100</defaultValue>
+        </input-field>
+        <input-field>
+            <name>donationAmountPreselected</name>
+            <label>Preselected Donation Amount</label>
+            <label lang="de-DE">Vorausgewählter Spendenbetrag</label>
+            <defaultValue>10</defaultValue>
+        </input-field>
+        <component name="sw-entity-single-select">
+            <name>donationTax</name>
+            <label>Tax on Donations</label>
+            <label lang="de-DE">Steuer für Spenden</label>
+            <helpText>Taxes can be created and edited in the store settings</helpText>
+            <helpText lang="de-DE">Steuern können in den Shop-Einstellungen angelegt und bearbeitet werden</helpText>
+            <entity>tax</entity>
+        </component>
+    </card>
+</config>

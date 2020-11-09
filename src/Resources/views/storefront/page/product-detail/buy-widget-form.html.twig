@@ -1,0 +1,50 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/buy-widget-form.html.twig' %}
+
+{% block page_product_detail_buy_container %}
+    {% if shopware.config.Klingelbeutel.config.donationAmountOptions %}
+        {% set donationAmountOptions = shopware.config.Klingelbeutel.config.donationAmountOptions
+            |split(',')
+            |filter(item => item matches '/^[0-9]*\\.?[0-9]+$/')
+        %}
+        {% set donationAmountPreselected =
+            shopware.config.Klingelbeutel.config.donationAmountPreselected in donationAmountOptions
+            ? shopware.config.Klingelbeutel.config.donationAmountPreselected
+            : null
+        %}
+        {% set donationLabel = product.charity and product.charity.getName()
+            ? 'shirtcharity.klingelbeutel.donationTo'|trans({ '%charity%': product.charity.getName() })
+            : 'shirtcharity.klingelbeutel.donation'|trans
+        %}
+        <div class="product-detail-configurator-group">
+            <div class="product-detail-configurator-group-title">
+                {{ donationLabel }}
+            </div>
+            <div class="product-detail-configurator-options">
+                <input type="hidden" name="lineItems[{{ product.id }}][donation_label]" value="{{ donationLabel }}">
+                {% for donationAmount in donationAmountOptions %}
+                    <div class="product-detail-configurator-option">
+                        <input type="radio"
+                            name="lineItems[{{ product.id }}][donation_amount]"
+                            value="{{ donationAmount }}"
+                            class="product-detail-configurator-option-input is-combinable"
+                            title="donation_amount_{{ donationAmount }}"
+                            id="donation_amount_{{ donationAmount }}"
+                            {% if
+                                (donationAmountPreselected is null and loop.first) or
+                                (donationAmountPreselected == donationAmount)
+                            %}
+                                checked="checked"
+                            {% endif %}
+                        >
+                        <label class="product-detail-configurator-option-label is-combinable is-display-text"
+                            title="{{ (0 + donationAmount)|currency }}"
+                            for="donation_amount_{{ donationAmount }}">
+                            {{ (0 + donationAmount)|currency }}
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    {{ parent() }}
+{% endblock %}
