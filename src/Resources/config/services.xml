@@ -7,6 +7,9 @@
             <argument type="service" id="request_stack"/>
             <tag name="kernel.event_subscriber"/>
         </service>
+        <service id="ShirtCharity\Klingelbeutel\Storefront\Page\Product\Subscriber\ProductPageCriteriaSubscriber">
+            <tag name="kernel.event_subscriber"/>
+        </service>
         <service id="ShirtCharity\Klingelbeutel\Core\Checkout\Cart\Donation\DonationComboCartProcessor">
             <argument type="service" id="Shopware\Core\Checkout\Cart\Price\QuantityPriceCalculator"/>
             <argument type="service" id="translator"/>
