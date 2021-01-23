@@ -13,12 +13,19 @@
         %}
         {% set charity = (product.extensions.charities|first).translated.name %}
         {% set donationLabel = charity
-            ? 'shirtcharity.klingelbeutel.donationTo'|trans({ '%charity%': charity })
+            ? 'shirtcharity.klingelbeutel.donationToCharity'|trans({ '%charity%': charity })
             : 'shirtcharity.klingelbeutel.donation'|trans
         %}
         <div class="product-detail-configurator-group">
             <div class="product-detail-configurator-group-title">
-                {{ donationLabel }}
+                {% if charity and product.seoCategory %}
+                    {{ 'shirtcharity.klingelbeutel.donationTo'|trans }}
+                    <a href="{{ seoUrl('frontend.navigation.page', { navigationId: product.seoCategory.id }) }}">
+                        {{ charity }}
+                    </a>
+                {% else %}
+                    {{ donationLabel }}
+                {% endif %}
             </div>
             <div class="product-detail-configurator-options">
                 <input type="hidden" name="lineItems[{{ product.id }}][donation_label]" value="{{ donationLabel }}">

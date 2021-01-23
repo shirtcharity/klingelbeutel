@@ -2,7 +2,8 @@
     "shirtcharity": {
         "klingelbeutel": {
             "donation": "Donation",
-            "donationTo": "Donation to %charity%"
+            "donationTo": "Donation to",
+            "donationToCharity": "Donation to %charity%"
         }
     }
 }
