@@ -27,6 +27,10 @@ class DonationLineItemAddedSubscriber implements EventSubscriberInterface
 
     public function onLineItemAdded(LineItemAddedEvent $event): void
     {
+        if (!$this->requestStack->getCurrentRequest()->get('lineItems')) {
+            return;
+        }
+
         $lineItem = $event->getLineItem();
         $amountKey = DonationComboCartProcessor::DONATION_AMOUNT_PAYLOAD_KEY;
         $labelKey = DonationComboCartProcessor::DONATION_LABEL_PAYLOAD_KEY;
