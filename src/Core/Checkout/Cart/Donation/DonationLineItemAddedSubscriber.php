@@ -2,7 +2,7 @@
 
 namespace ShirtCharity\Klingelbeutel\Core\Checkout\Cart\Donation;
 
-use Shopware\Core\Checkout\Cart\Event\LineItemAddedEvent;
+use Shopware\Core\Checkout\Cart\Event\BeforeLineItemAddedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -21,11 +21,11 @@ class DonationLineItemAddedSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            LineItemAddedEvent::class => 'onLineItemAdded',
+            BeforeLineItemAddedEvent::class => 'onLineItemAdded',
         ];
     }
 
-    public function onLineItemAdded(LineItemAddedEvent $event): void
+    public function onLineItemAdded(BeforeLineItemAddedEvent $event): void
     {
         if (!$this->requestStack->getCurrentRequest()->get('lineItems')) {
             return;

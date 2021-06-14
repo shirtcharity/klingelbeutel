@@ -177,7 +177,6 @@ class DonationComboCartProcessor implements CartDataCollectorInterface, CartProc
         $donationPriceDefinition = new QuantityPriceDefinition(
             $price,
             $this->getDonationTaxRuleCollection($context),
-            $context->getContext()->getCurrencyPrecision(),
             $donationLineItem->getQuantity()
         );
         $donationLineItem->setPriceDefinition($donationPriceDefinition);

@@ -1,14 +1,14 @@
 {% sw_extends '@Storefront/storefront/page/product-detail/buy-widget-form.html.twig' %}
 
 {% block page_product_detail_buy_container %}
-    {% if shopware.config.Klingelbeutel.config.donationAmountOptions %}
-        {% set donationAmountOptions = shopware.config.Klingelbeutel.config.donationAmountOptions
+    {% if config('Klingelbeutel.config.donationAmountOptions') %}
+        {% set donationAmountOptions = config('Klingelbeutel.config.donationAmountOptions')
             |split(',')
             |filter(item => item matches '/^[0-9]*\\.?[0-9]+$/')
         %}
         {% set donationAmountPreselected =
-            shopware.config.Klingelbeutel.config.donationAmountPreselected in donationAmountOptions
-            ? shopware.config.Klingelbeutel.config.donationAmountPreselected
+            config('Klingelbeutel.config.donationAmountPreselected') in donationAmountOptions
+            ? config('Klingelbeutel.config.donationAmountPreselected')
             : null
         %}
         {% set charity = (product.extensions.charities|first).translated.name %}

@@ -2,7 +2,7 @@
 
 namespace ShirtCharity\Klingelbeutel\Storefront\Page\Product\Subscriber;
 
-use Shopware\Storefront\Page\Product\ProductLoaderCriteriaEvent;
+use Shopware\Storefront\Page\Product\ProductPageCriteriaEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ProductPageCriteriaSubscriber implements EventSubscriberInterface
@@ -10,12 +10,13 @@ class ProductPageCriteriaSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            ProductLoaderCriteriaEvent::class => 'onProductCriteriaLoaded',
+            ProductPageCriteriaEvent::class => 'onProductCriteriaLoaded',
         ];
     }
 
-    public function onProductCriteriaLoaded(ProductLoaderCriteriaEvent $event): void
+    public function onProductCriteriaLoaded(ProductPageCriteriaEvent $event): void
     {
+        $event->getCriteria()->addAssociation('charities');
         $event->getCriteria()->addAssociation('charities.logo');
         $event->getCriteria()->addAssociation('charities.translations');
     }

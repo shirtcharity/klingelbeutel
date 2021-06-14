@@ -17,11 +17,15 @@
   "extra": {
     "shopware-plugin-class": "ShirtCharity\\Klingelbeutel\\Klingelbeutel",
     "label": {
-      "de-DE": "Klingelbeutel (shirt.charity-Plugin um Spendenoptionen zu Produkten hinzuzufügen)",
-      "en-GB": "Klingelbeutel (shirt.charity plugin to add donation options to products)"
+      "de-DE": "shirt.charity Klingelbeutel",
+      "en-GB": "shirt.charity Klingelbeutel"
+    },
+    "description": {
+      "de-DE": "shirt.charity-Plugin um Spendenoptionen zu Produkten hinzuzufügen",
+      "en-GB": "shirt.charity plugin to add donation options to products"
     }
   },
   "scripts": {
-    "ecs": "../../../dev-ops/analyze/vendor/bin/ecs --config ../../../platform/easy-coding-standard.yml check ./src/"
+    "ecs": "../../../dev-ops/analyze/vendor/bin/ecs --config ../../../platform/easy-coding-standard.php check ./src/"
   }
 }
