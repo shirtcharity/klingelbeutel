@@ -11,18 +11,42 @@
             ? config('Klingelbeutel.config.donationAmountPreselected')
             : null
         %}
-        {% set charity = (product.extensions.charities|first).translated.name %}
         {% set donationLabel = charity
-            ? 'shirtcharity.klingelbeutel.donationToCharity'|trans({ '%charity%': charity })
+            ? 'shirtcharity.klingelbeutel.donationToCharity'|trans({ '%charity%': charity.translated.name })
             : 'shirtcharity.klingelbeutel.donation'|trans
         %}
         <div class="product-detail-configurator-group">
             <div class="product-detail-configurator-group-title">
-                {% if charity and product.seoCategory %}
+                {% if charity %}
                     {{ 'shirtcharity.klingelbeutel.donationTo'|trans }}
-                    <a href="{{ seoUrl('frontend.navigation.page', { navigationId: product.seoCategory.id }) }}">
-                        {{ charity }}
-                    </a>
+                    {% if charity.categoryLink %}
+                        <a href="{{ charity.categoryLink }}">
+                            {{ charity.translated.name }}
+                        </a>
+                    {% else %}
+                        {{ charity.translated.name }}
+                    {% endif %}
+                {% elseif charities %}
+                    {% set randomCharity = random(charities) %}
+                    {{ 'shirtcharity.klingelbeutel.donationTo'|trans }}
+                    <select name="charitySelect">
+                        {% for c in charities %}
+                            <option value="{{ c.translated.name }}"{% if c == randomCharity %} selected="selected"{% endif %}>
+                                {{ c.translated.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <script>
+                        var setDonationLabel = function (charityLabel) {
+                            document.getElementsByName('lineItems[{{ product.id }}][donation_label]')[0].value = "{{ 'shirtcharity.klingelbeutel.donationTo'|trans }} " + charityLabel;
+                        };
+                        document.getElementsByName('charitySelect')[0].onchange = function (event) {
+                            setDonationLabel(event.target.value);
+                        };
+                        window.addEventListener('DOMContentLoaded', function () {
+                            setDonationLabel(document.getElementsByName('charitySelect')[0].value);
+                        });
+                    </script>
                 {% else %}
                     {{ donationLabel }}
                 {% endif %}
